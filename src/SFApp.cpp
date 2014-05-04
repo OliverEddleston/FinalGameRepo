@@ -25,11 +25,16 @@ SFApp::SFApp() : fire(0), score(0), coin(0), is_running(true) {
 
  //Adding static barriers
 const int number_of_barriers = 2;
+int width = 200;
+int height = 330;
   for(int j=0; j<number_of_barriers; j++) {
     // place an barrier at width/number_of_barrier * i
     auto barrier = make_shared<SFAsset>(SFASSET_BARRIER);
-    auto pos   = Point2(50+(surface->w/2) * j, 200.0f);
+    auto pos   = Point2(width , height);
     barrier->SetPosition(pos);
+    barriers.push_back(barrier);
+    width =width+300;
+     
   }
 }
 
@@ -90,8 +95,13 @@ void SFApp::OnUpdateWorld() {
   }
 
   // Adding barriers to the game
-  for(auto b : barrier) {
-    // do something here
+  for(auto b : barriers) {
+    for (auto p: projectiles){
+   if(p->CollidesWith(b)){
+     p->HandleCollision();
+    }
+
+   }
   }
 
   // Detect collision with projectile and the enemy
@@ -161,6 +171,11 @@ void SFApp::OnRender() {
 
   // draw the player
   player->OnRender(surface);
+for (auto b: barriers){
+if(b->IsAlive())   {b->OnRender(surface);}
+
+}
+
 
   for(auto p: projectiles) {
     if(p->IsAlive()) {p->OnRender(surface);}

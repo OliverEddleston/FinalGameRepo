@@ -36,7 +36,7 @@ private:
   list<shared_ptr<SFAsset> > projectiles;
   list<shared_ptr<SFAsset> > aliens;
   list<shared_ptr<SFAsset> > coins;
-  list<shared_ptr<SFAsset> > barrier;
+  list<shared_ptr<SFAsset> > barriers;
 
   int fire;
   int score;

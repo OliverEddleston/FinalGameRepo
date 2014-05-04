@@ -136,8 +136,6 @@ if(check == true){
     }
 }
 
-
-
 void SFAsset::GoNorth() {
   Vector2 c = *(bbox->centre) + Vector2(0.0f, 1.0f);
   bbox->centre.reset();
